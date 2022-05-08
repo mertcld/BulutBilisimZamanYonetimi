@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Bulutbilisim.Models.Denemes>
+
+@foreach(var item in Model)
+            {
+                <p>@item.Name</p>
+                <p>@item.Adres</p>
+            }
+
+<a class="btn btn-danger" href="@Url.Action("Create","Deneme")">Ekle</a>

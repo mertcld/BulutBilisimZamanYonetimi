@@ -1,0 +1,136 @@
+﻿
+@section Style{
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/jkanban/jkanban.min.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/css/pages/app-kanban.css">
+}
+
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+        <div class="content-header row">
+        </div>
+        <div class="content-body">
+            <!-- Basic Kanban App -->
+            <div class="kanban-overlay"></div>
+            <section id="kanban-wrapper">
+                <div class="row">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-primary mb-1" id="add-kanban">
+                            <i class='feather icon-plus-square mr-50'></i> Yeni Kısım Ekle
+                        </button>
+                        <div id="kanban-app"></div>
+                    </div>
+                </div>
+
+                <!-- User new mail right area -->
+                <div class="kanban-sidebar">
+                    <div class="card shadow-none quill-wrapper">
+                        <div class="card-header d-flex justify-content-between align-items-center border-bottom px-2 py-1">
+                            <h3 class="card-title">UI Dizayn</h3>
+                            <button type="button" class="close close-icon">
+                                <i class="feather icon-x"></i>
+                            </button>
+                        </div>
+                        <!-- form start -->
+                        <form class="edit-kanban-item">
+                            <div class="card-content position-relative">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label>Kart Başlığı</label>
+                                        <input type="text" class="form-control edit-kanban-item-title" placeholder="kanban Title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Due Date</label>
+                                        <input type="text" class="form-control edit-kanban-item-date" placeholder="21 August, 2019">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>Filtre</label>
+                                                <select class="form-control text-white">
+                                                    <option class="bg-primary" selected>Mavi</option>
+                                                    <option class="bg-danger">Kırmızı</option>
+                                                    <option class="bg-success">Yeşil</option>
+                                                  
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>Üye</label>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar m-0 mr-1">
+                                                        <img src="../../../app-assets/images/portrait/small/avatar-s-20.png" height="36" width="36" alt="avtar img holder">
+                                                    </div>
+                                                    <div class="badge-circle">
+                                                        <i class="feather icon-plus"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Attachment</label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="emailAttach">
+                                            <label class="custom-file-label" for="emailAttach">Dosya Ekle</label>
+                                        </div>
+                                    </div>
+                                    <!-- Compose mail Quill editor -->
+                                    <div class="form-group">
+                                        <label>Comment</label>
+                                        <div class="snow-container border rounded p-1">
+                                            <div class="compose-editor"></div>
+                                            <div class="d-flex justify-content-end">
+                                                <div class="compose-quill-toolbar">
+                                                    <span class="ql-formats mr-0">
+                                                        <button class="ql-bold"></button>
+                                                        <button class="ql-italic"></button>
+                                                        <button class="ql-underline"></button>
+                                                        <button class="ql-link"></button>
+                                                        <button class="ql-image"></button>
+                                                        <button class="btn btn-sm btn-primary btn-comment ml-25">Yorum</button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-end">
+                                <button type="reset" class="btn btn-danger delete-kanban-item mr-1">
+                                    <i class='feather icon-trash-2 mr-50'></i>
+                                    <span>Sil</span>
+                                </button>
+                                <button class="btn btn-primary glow update-kanban-item">
+                                    <i class='feather icon-play mr-50'></i>
+                                    <span>Kaydet</span>
+                                </button>
+                            </div>
+                        </form>
+                        <!-- form start end-->
+                    </div>
+                </div>
+                <!--/ User Chat profile right area -->
+            </section>
+            <!--/ Sample Project kanban -->
+        </div>
+    </div>
+</div>
+<!-- END: Content-->
+
+<div class="sidenav-overlay"></div>
+<div class="drag-target"></div>
+
+
+
+
+
+
+@section Scripts{
+    <script src="~/app-assets/vendors/js/jkanban/jkanban.min.js"></script>
+
+    <script src="~/app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+    <script src="~/app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
+    <script src="~/app-assets/js/scripts/pages/app-kanban.js"></script>
+}

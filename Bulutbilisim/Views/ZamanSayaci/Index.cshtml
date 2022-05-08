@@ -1,0 +1,165 @@
+﻿
+@section Style{
+   
+    <style>
+ 
+        #date-picker {
+            text-align: center;
+            margin: 70px auto 0;
+        }
+
+            #date-picker input#date-input {
+                width: 200px;
+                padding: 5px;
+                border-radius: 7px;
+                border: 1px solid #050505;
+                outline: none;
+            }
+
+            #date-picker #set-new-date {
+                padding: 5px;
+                border-radius: 5px;
+                outline: none;
+            }
+
+            #date-picker span {
+                margin-top: 10px;
+                display: block;
+                color: #757575;
+            }
+
+        #countdown-timer {
+            font-family: 'Oleo Script';
+            text-align: center;
+            margin: 100px auto;
+        }
+
+            #countdown-timer h1 {
+                font-size: 50px;
+            }
+
+            #countdown-timer .invisible {
+                display: none;
+            }
+
+            #countdown-timer span {
+                display: inline-block;
+                width: 50px;
+                padding: 30px 15px;
+                margin: 5px;
+                background: #050505;
+                border-radius: 7px;
+                color: #fff;
+                font-weight: bold;
+                font-size: 22px;
+            }
+    </style>
+}
+<div style="height:500px;">
+    <div id="date-picker">
+        <input id="date-input" value="04/22/2022 04:28:00 PM" />
+        <button id="set-new-date">Tarih Seç</button><span>Girdiğin tarih <i>03/05/2022 02:01:30 PM</i> formatında olmalı</span>
+    </div>
+    <div id="countdown-timer">
+        <div id="timer-wrap"><span id="days">00</span><span id="hours">00</span><span id="minutes">00</span><span id="seconds">00</span></div>
+        <h1 class="invisible" id="time-is-over">Zaman Doldu!</h1>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        (function () {
+            var timeover = false;
+            var timerNew = false;
+ 
+            var audio = new Audio('https://wavlist.com/wav/clock-alarm2.wav');
+            var callbackfunction = () => {
+                audio.play();
+                setTimeout(document.getElementById('timer-wrap').classList.add('fadeOutUp', 'animated'), 1000);
+                setTimeout(function () {
+                    document.getElementById('time-is-over').classList.remove('invisible');
+                    document.getElementById('time-is-over').classList.add('fadeInDown', 'animated');
+                }, 200);
+            };
+            var date_picker = new Date().getTime() + 7000;
+            var date_arr = ['days', 'hours', 'minutes', 'seconds'];
+
+            var countdown = (end, elements, callback) => {
+
+                var _second = 1000,
+                    _minute = _second * 60,
+                    _hour = _minute * 60,
+                    _day = _hour * 24,
+
+                    end = new Date(end),
+                    timer;
+
+                var calculate = function () {
+
+                    var now = new Date(),
+                        remaining = end.getTime() - now.getTime(),
+                        data;
+
+                    if (isNaN(end)) {
+                        console.log('Tarih yanlış', end);
+                        return;
+                    }
+
+                    if (remaining <= 0) {
+                        clearInterval(timer);
+                        if (typeof callback === 'function') {
+                            callback();
+                        }
+                        timeover = true;
+                    } else {
+                        if (!timer) {
+                            timer = setInterval(calculate, _second);
+                        }
+                        timeover = false;
+                        data = {
+                            'days': Math.floor(remaining / _day),
+                            'hours': Math.floor(remaining % _day / _hour),
+                            'minutes': Math.floor(remaining % _hour / _minute),
+                            'seconds': Math.floor(remaining % _minute / _second)
+                        };
+
+
+                        if (elements.length) {
+                            for (x in elements) {
+                                var x = elements[x];
+                                data[x] = ('00' + data[x]).slice(-2);
+                                document.getElementById(x).innerHTML = data[x];
+                            }
+                        }
+                    }
+                };
+
+                calculate();
+
+                document.getElementById('set-new-date').onclick = () => {
+                    clearInterval(timer);
+
+                    document.getElementById('timer-wrap').classList.remove('fadeOutUp', 'animated');
+                    document.getElementById('timer-wrap').classList.add('fadeInDown', 'animated');
+                    document.getElementById('time-is-over').classList.add('invisible');
+                    document.getElementById('time-is-over').classList.remove('fadeInDown', 'animated');
+
+                    date_picker = document.getElementById('date-input').value;
+                    date_arr = ['days', 'hours', 'minutes', 'seconds'];
+                    countdown(date_picker, date_arr, callbackfunction);
+                };
+            };
+
+            countdown(date_picker, date_arr, callbackfunction);
+
+
+            $('#date-input').datetimepicker({
+                timeFormat: 'hh:mm:ss TT',
+                dateFormat: 'mm/dd/yy'
+            });
+
+        })();
+    </script>
+
+
+
+}
