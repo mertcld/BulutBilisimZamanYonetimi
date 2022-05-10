@@ -1,2 +1,2 @@
 # BulutBilisimZamanYonetimi
-https://bulutbilisim.kodblog.online
+<a href="https://bulutbilisim.kodblog.online"> Site </a>
